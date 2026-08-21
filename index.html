@@ -1,2 +1,825 @@
 
-yo
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b214a">
+  <meta name="description" content="MathBase Prep help and support information for learner accounts, passwords, data protection, exam records and technical issues.">
+  <title>Help and Support | MathBase Prep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #101828;
+      --ink-soft: #344054;
+      --muted: #667085;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fc;
+      --line: #dfe5ee;
+      --line-strong: #cbd5e1;
+      --navy: #173b82;
+      --navy-dark: #0b214a;
+      --teal: #0f766e;
+      --purple: #6d28d9;
+      --gold: #a96207;
+      --green: #047857;
+      --amber: #b45309;
+      --red: #b42318;
+      --blue-soft: #eef4ff;
+      --focus: #2563eb;
+      --shadow-lg: 0 28px 76px rgba(15, 23, 42, 0.13);
+      --shadow-md: 0 16px 42px rgba(15, 23, 42, 0.09);
+      --shadow-sm: 0 8px 25px rgba(15, 23, 42, 0.065);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Manrope", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 7% -5%, rgba(23, 59, 130, 0.15), transparent 32rem),
+        radial-gradient(circle at 96% 3%, rgba(15, 118, 110, 0.12), transparent 34rem),
+        linear-gradient(180deg, #fbfcff 0%, #f2f6fb 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .26;
+      background-image: radial-gradient(rgba(23, 59, 130, .17) .65px, transparent .65px);
+      background-size: 20px 20px;
+      mask-image: linear-gradient(to bottom, #000, transparent 73%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button, a, summary { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid rgba(37, 99, 235, .42); outline-offset: 3px; }
+    [hidden] { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .shell { width: min(1220px, calc(100% - 32px)); margin: 0 auto; padding: 18px 0 46px; }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 70px;
+      padding: 10px 12px 10px 14px;
+      border: 1px solid rgba(223, 229, 238, .92);
+      border-radius: 22px;
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(18px);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; flex: 0 0 auto; min-width: 0; }
+    .logo {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      color: #fff;
+      font-size: .96rem;
+      font-weight: 900;
+      letter-spacing: -.07em;
+      background: linear-gradient(135deg, var(--navy), var(--teal));
+      box-shadow: 0 12px 28px rgba(23,59,130,.24);
+    }
+    .brand-copy strong, .brand-copy span { display: block; }
+    .brand-copy strong { font-size: .98rem; font-weight: 900; letter-spacing: -.035em; line-height: 1.15; }
+    .brand-copy span { margin-top: 2px; color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .02em; }
+    .nav-wrap { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .nav { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
+    .nav a, .nav .logout-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 42px;
+      padding: 9px 13px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      background: transparent;
+      color: #475467;
+      font-size: .82rem;
+      font-weight: 850;
+      white-space: nowrap;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .nav a:hover, .nav .logout-button:hover { transform: translateY(-1px); border-color: var(--line); background: var(--surface-soft); color: var(--ink); }
+    .nav a.active { border-color: var(--ink); background: var(--ink); color: #fff; box-shadow: 0 7px 18px rgba(16,24,40,.14); }
+    .nav a.performance-link:not(.active) { border-color: #d5e1f4; background: #eef4ff; color: var(--navy); }
+    .nav .logout-button { border-color: #f1c6c4; background: #fff7f7; color: #a9322d; }
+    .nav .logout-button:hover { border-color: #e69a96; background: #fff0f0; color: var(--red); }
+    .nav .logout-button svg { width: 15px; height: 15px; }
+    .menu-toggle {
+      display: none;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+      color: var(--ink);
+    }
+    .menu-toggle svg { width: 21px; height: 21px; }
+
+    .help-hero {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-columns: minmax(0,1.15fr) minmax(330px,.85fr);
+      gap: clamp(24px,4.5vw,58px);
+      align-items: center;
+      margin-top: 24px;
+      padding: clamp(31px,5vw,55px);
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      color: #fff;
+      background: linear-gradient(135deg,#0b214a 0%,#173b82 58%,#0f766e 132%);
+      box-shadow: var(--shadow-lg);
+    }
+    .help-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 320px;
+      height: 320px;
+      right: -140px;
+      top: -170px;
+      border: 54px solid rgba(255,255,255,.075);
+      border-radius: 50%;
+    }
+    .help-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 210px;
+      height: 210px;
+      left: 43%;
+      bottom: -145px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.065);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.9);
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: .02em;
+    }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #8ee8d8; box-shadow: 0 0 0 5px rgba(142,232,216,.12); }
+    h1, h2, h3, p { margin-top: 0; }
+    .help-hero h1 { max-width: 12ch; margin-bottom: 15px; font-size: clamp(2.55rem,5.4vw,4.85rem); line-height: .98; letter-spacing: -.075em; }
+    .help-hero .lead { max-width: 64ch; margin-bottom: 0; color: rgba(255,255,255,.79); font-size: clamp(.98rem,1.3vw,1.08rem); line-height: 1.67; }
+    .hero-contact {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 25px;
+      background: rgba(255,255,255,.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 18px 42px rgba(0,0,0,.13);
+      backdrop-filter: blur(10px);
+    }
+    .hero-contact-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,.25); border-radius: 15px; background: rgba(255,255,255,.12); }
+    .hero-contact-icon svg { width: 24px; height: 24px; }
+    .hero-contact h2 { margin-bottom: 7px; font-size: 1.15rem; letter-spacing: -.04em; }
+    .hero-contact p { margin-bottom: 15px; color: rgba(255,255,255,.72); font-size: .77rem; line-height: 1.55; }
+    .hero-email {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 14px;
+      border: 1px solid #fff;
+      border-radius: 14px;
+      background: #fff;
+      color: var(--navy-dark);
+      font-size: .79rem;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+    .hero-email:hover { transform: translateY(-2px); box-shadow: 0 15px 32px rgba(0,0,0,.17); }
+    .hero-email svg { flex: 0 0 auto; width: 17px; height: 17px; }
+    .hero-warning { display: flex; gap: 8px; align-items: flex-start; margin: 13px 0 0; color: rgba(255,255,255,.72); font-size: .68rem; line-height: 1.45; }
+    .hero-warning svg { flex: 0 0 auto; width: 15px; height: 15px; margin-top: 1px; }
+
+    .help-layout { display: grid; grid-template-columns: minmax(260px,.34fr) minmax(0,1fr); gap: 16px; align-items: start; margin-top: 18px; }
+    .card { border: 1px solid var(--line); border-radius: var(--radius-lg); background: rgba(255,255,255,.97); box-shadow: var(--shadow-sm); }
+    .support-sidebar { position: sticky; top: 102px; display: grid; gap: 13px; }
+    .side-card { padding: 20px; }
+    .side-card h2 { margin-bottom: 7px; font-size: 1.08rem; letter-spacing: -.04em; }
+    .side-card > p { margin-bottom: 15px; color: var(--muted); font-size: .76rem; line-height: 1.55; }
+    .side-kicker { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 8px; color: var(--navy); font-size: .67rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .side-kicker::before { content: ""; width: 17px; height: 2px; border-radius: 999px; background: var(--navy); }
+    .support-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 47px;
+      padding: 11px 13px;
+      border: 1px solid var(--navy);
+      border-radius: 13px;
+      background: var(--navy);
+      color: #fff;
+      font-size: .76rem;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(23,59,130,.18);
+    }
+    .support-button:hover { background: var(--navy-dark); }
+    .support-button svg { width: 16px; height: 16px; }
+    .support-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .support-list li { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 9px; align-items: flex-start; color: #475467; font-size: .72rem; line-height: 1.48; }
+    .support-list li::before { content: ""; width: 7px; height: 7px; margin-top: .47em; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(15,118,110,.08); }
+    .privacy-summary { border-left: 5px solid var(--teal); }
+    .privacy-summary strong { color: var(--ink); }
+
+    .faq-card { min-width: 0; overflow: hidden; }
+    .faq-header { padding: 20px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg,#fff 0%,#fbfcfe 100%); }
+    .faq-title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 15px; }
+    .faq-title-row h2 { margin-bottom: 5px; font-size: clamp(1.35rem,2.2vw,1.8rem); letter-spacing: -.045em; }
+    .faq-title-row p { margin-bottom: 0; color: var(--muted); font-size: .78rem; line-height: 1.52; }
+    .question-count { flex: 0 0 auto; min-height: 32px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface-soft); color: #475467; font-size: .68rem; font-weight: 900; }
+    .search-wrap { position: relative; }
+    .search-wrap svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: #667085; pointer-events: none; }
+    .search-wrap input { width: 100%; min-height: 50px; padding: 12px 44px 12px 42px; border: 1px solid var(--line-strong); border-radius: 14px; outline: none; background: #fff; color: var(--ink); font-size: .82rem; }
+    .search-wrap input:focus { border-color: var(--focus); box-shadow: 0 0 0 4px rgba(37,99,235,.11); }
+    .clear-search { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: #475467; font-size: 1rem; }
+    .clear-search:hover { background: var(--surface-soft); color: var(--ink); }
+    .faq-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+    .category-tabs { display: flex; gap: 6px; max-width: 100%; overflow-x: auto; padding: 2px; scrollbar-width: thin; }
+    .category-button { flex: 0 0 auto; min-height: 36px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: #475467; font-size: .67rem; font-weight: 850; }
+    .category-button[aria-pressed="true"] { border-color: var(--navy); background: var(--blue-soft); color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
+    .expand-actions { display: flex; gap: 6px; flex: 0 0 auto; }
+    .text-button { min-height: 36px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-soft); color: #475467; font-size: .66rem; font-weight: 850; }
+    .text-button:hover { border-color: var(--line-strong); background: #fff; color: var(--ink); }
+    .search-status { min-height: 1.4em; margin: 10px 0 0; color: var(--muted); font-size: .68rem; font-weight: 750; }
+
+    .faq-list { display: grid; gap: 10px; padding: 14px; background: #f8fafc; }
+    .faq-item { overflow: hidden; border: 1px solid var(--line); border-radius: 17px; background: #fff; box-shadow: 0 4px 14px rgba(15,23,42,.035); }
+    .faq-item[open] { border-color: #c7d7f2; box-shadow: 0 9px 25px rgba(23,59,130,.075); }
+    .faq-item summary { position: relative; display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 12px; align-items: center; min-height: 72px; padding: 14px 16px; cursor: pointer; list-style: none; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 13px; background: var(--faq-soft,#eef4ff); color: var(--faq-accent,var(--navy)); }
+    .faq-icon svg { width: 20px; height: 20px; }
+    .faq-summary-copy strong, .faq-summary-copy span { display: block; }
+    .faq-summary-copy strong { color: var(--ink); font-size: .82rem; line-height: 1.38; }
+    .faq-summary-copy span { margin-top: 4px; color: var(--muted); font-size: .62rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .faq-chevron { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 10px; color: #475467; transition: transform 160ms ease, background 160ms ease; }
+    .faq-chevron svg { width: 17px; height: 17px; }
+    .faq-item[open] .faq-chevron { transform: rotate(180deg); background: var(--surface-soft); }
+    .faq-content { padding: 0 18px 18px 70px; border-top: 1px solid var(--line); color: #475467; font-size: .77rem; line-height: 1.65; }
+    .faq-content p { margin: 14px 0 0; }
+    .faq-content ul { display: grid; gap: 8px; margin: 12px 0 0; padding-left: 18px; }
+    .faq-content li::marker { color: var(--navy); }
+    .faq-content strong { color: var(--ink); }
+    .faq-content a { color: var(--navy); font-weight: 850; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .notice-box { margin-top: 13px; padding: 12px 13px; border: 1px solid #d7e5ff; border-radius: 13px; background: #f3f7ff; color: #344054; }
+    .notice-box.warning { border-color: #fed7aa; background: #fff7ed; color: #7c2d12; }
+    .notice-box.good { border-color: #bce6d2; background: #ecfdf5; color: #065f46; }
+    .no-results { margin: 0; padding: 34px 18px; text-align: center; color: var(--muted); font-size: .78rem; line-height: 1.55; }
+
+    .developer-notes {
+      margin-top: 34px;
+      padding: 18px 20px;
+      border: 2px dashed #dc2626;
+      border-radius: 18px;
+      background: #fff1f2;
+      color: #7f1d1d;
+      font-size: .77rem;
+      line-height: 1.62;
+    }
+    .developer-notes > strong { display: block; margin-bottom: 8px; color: #991b1b; font-size: .84rem; letter-spacing: .01em; }
+    .developer-notes p { margin: 0 0 9px; }
+    .developer-notes p:last-child { margin-bottom: 0; }
+    .developer-notes b { color: #7f1d1d; }
+
+    .page-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; padding: 0 4px; color: var(--muted); font-size: .68rem; }
+    .page-footer a { color: var(--navy); font-weight: 850; }
+
+    @media (max-width: 1050px) {
+      .help-hero { grid-template-columns: 1fr; }
+      .hero-contact { width: min(100%,620px); }
+      .help-layout { grid-template-columns: 1fr; }
+      .support-sidebar { position: static; grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      .topbar { position: relative; top: auto; }
+      .menu-toggle { display: grid; }
+      .nav-wrap { margin-left: auto; }
+      .nav {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        display: none;
+        width: min(350px, calc(100vw - 32px));
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255,255,255,.99);
+        box-shadow: var(--shadow-md);
+        backdrop-filter: blur(18px);
+      }
+      .nav.is-open { display: grid; }
+      .nav a, .nav .logout-button { justify-content: flex-start; width: 100%; }
+      .faq-tools { align-items: flex-start; flex-direction: column; }
+      .category-tabs { width: 100%; }
+      .expand-actions { width: 100%; }
+      .expand-actions .text-button { flex: 1; }
+    }
+    @media (max-width: 650px) {
+      .shell { width: min(100% - 20px, 1220px); padding-top: 10px; }
+      .topbar { min-height: 64px; border-radius: 18px; }
+      .brand-copy span { display: none; }
+      .help-hero { margin-top: 16px; padding: 29px 21px; border-radius: 25px; }
+      .help-hero h1 { max-width: 13ch; font-size: clamp(2.35rem,12vw,3.75rem); }
+      .hero-contact { padding: 18px; border-radius: 20px; }
+      .support-sidebar { grid-template-columns: 1fr; }
+      .faq-title-row { align-items: flex-start; flex-direction: column; }
+      .faq-header { padding: 17px; }
+      .faq-list { padding: 10px; }
+      .faq-item summary { grid-template-columns: auto minmax(0,1fr) auto; gap: 10px; min-height: 68px; padding: 12px; }
+      .faq-icon { width: 36px; height: 36px; border-radius: 11px; }
+      .faq-content { padding: 0 14px 15px; }
+      .faq-content::before { content: ""; display: block; height: 1px; }
+      .developer-notes { padding: 16px; }
+      .page-footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body id="top" data-page="help">
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="https://mathbase1.github.io/11-plus-dashboard/" data-track="Dashboard brand" aria-label="MathBase Prep dashboard">
+        <span class="logo" aria-hidden="true">11+</span>
+        <span class="brand-copy"><strong>MathBase Prep</strong><span>11+ learner portal</span></span>
+      </a>
+      <div class="nav-wrap">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open navigation menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+        <nav class="nav" id="primaryNav" aria-label="Primary navigation">
+          <a href="https://mathbase1.github.io/11-plus-dashboard/" data-track="Dashboard">Dashboard</a>
+          <a href="https://mathbase1.github.io/11-plus-practice-menu/" data-track="Practice">Practice</a>
+          <a href="https://mathbase1.github.io/11-plus-exams-menu/" data-track="Exams">Exams</a>
+          <a class="performance-link" href="https://mathbase1.github.io/data/" data-track="My Performance">My Performance</a>
+          <a class="active" href="https://mathbase1.github.io/help/" data-track="Help" aria-current="page">Help</a>
+          <a class="logout-button" href="https://mathbase1.github.io/11plus-pem/" data-logout>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"></path><path d="M15 12H3"></path><path d="M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"></path></svg>
+            <span>Log out</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="help-hero" aria-labelledby="pageTitle">
+        <div>
+          <div class="eyebrow">Help and support</div>
+          <h1 id="pageTitle">Answers when you need them.</h1>
+          <p class="lead">Find clear guidance about account access, passwords, learner records, data protection, exam results, security and technical support.</p>
+        </div>
+        <aside class="hero-contact" aria-labelledby="supportTitle">
+          <span class="hero-contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="m4 6 8 6 8-6"></path></svg>
+          </span>
+          <h2 id="supportTitle">Contact PEM Tutoring</h2>
+          <p>For account, password, data or technical support, email the support team and include the learner username where possible.</p>
+          <a class="hero-email" href="mailto:info@pemtutoring.co.uk?subject=MathBase%20Prep%20support%20request">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"></path><path d="m4 6 8 6 8-6"></path></svg>
+            <span>info@pemtutoring.co.uk</span>
+          </a>
+          <p class="hero-warning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 17h.01"></path></svg><span>Never send a password, payment card details or unnecessary personal information by email.</span></p>
+        </aside>
+      </section>
+
+      <section class="help-layout" aria-label="Help information">
+        <aside class="support-sidebar">
+          <section class="card side-card" aria-labelledby="contactCardTitle">
+            <div class="side-kicker">Support request</div>
+            <h2 id="contactCardTitle">What to include</h2>
+            <p>Providing the following details helps the support team identify the problem without requesting sensitive information.</p>
+            <ul class="support-list">
+              <li>The learner username.</li>
+              <li>The page or activity being used.</li>
+              <li>The device and browser.</li>
+              <li>The approximate date and time of the issue.</li>
+              <li>A screenshot, provided it contains no password or payment details.</li>
+            </ul>
+            <a class="support-button" href="mailto:info@pemtutoring.co.uk?subject=MathBase%20Prep%20support%20request">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"></path><path d="m4 6 8 6 8-6"></path></svg>
+              Email support
+            </a>
+          </section>
+
+          <section class="card side-card privacy-summary" aria-labelledby="privacyCardTitle">
+            <div class="side-kicker">Privacy summary</div>
+            <h2 id="privacyCardTitle">Your information</h2>
+            <p><strong>Account and learning information is used to provide access, save results, show progress, protect the service and respond to support requests.</strong></p>
+            <p>This page is a plain-English summary. The formal privacy notice should be read for the complete legal information.</p>
+          </section>
+        </aside>
+
+        <section class="card faq-card" aria-labelledby="faqTitle">
+          <div class="faq-header">
+            <div class="faq-title-row">
+              <div>
+                <h2 id="faqTitle">Help topics</h2>
+                <p>Search the guidance or open any section to read the full answer.</p>
+              </div>
+              <span class="question-count" id="questionCount">11 topics</span>
+            </div>
+
+            <div class="search-wrap">
+              <label class="sr-only" for="helpSearch">Search help topics</label>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+              <input id="helpSearch" type="search" autocomplete="off" placeholder="Search passwords, data, results, security or technical help">
+              <button class="clear-search" id="clearSearch" type="button" aria-label="Clear help search" hidden>×</button>
+            </div>
+
+            <div class="faq-tools">
+              <div class="category-tabs" aria-label="Filter help topics">
+                <button class="category-button" type="button" data-category="all" aria-pressed="true">All</button>
+                <button class="category-button" type="button" data-category="account" aria-pressed="false">Accounts</button>
+                <button class="category-button" type="button" data-category="data" aria-pressed="false">Data and privacy</button>
+                <button class="category-button" type="button" data-category="results" aria-pressed="false">Results</button>
+                <button class="category-button" type="button" data-category="security" aria-pressed="false">Security</button>
+                <button class="category-button" type="button" data-category="technical" aria-pressed="false">Technical</button>
+              </div>
+              <div class="expand-actions">
+                <button class="text-button" id="expandAll" type="button">Expand all</button>
+                <button class="text-button" id="collapseAll" type="button">Collapse all</button>
+              </div>
+            </div>
+            <p class="search-status" id="searchStatus" role="status" aria-live="polite">Showing all help topics.</p>
+          </div>
+
+          <div class="faq-list" id="faqList">
+            <details class="faq-item" data-category="account" data-keywords="forgot forgotten username password reset login access credentials account locked" open style="--faq-accent:#173b82;--faq-soft:#eef4ff">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"></path></svg></span>
+                <span class="faq-summary-copy"><strong>I have forgotten my username or password</strong><span>Account access</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Email <a href="mailto:info@pemtutoring.co.uk?subject=MathBase%20Prep%20password%20support">info@pemtutoring.co.uk</a>. Include the learner username if it is known and enough information for the account holder to be verified.</p>
+                <ul>
+                  <li>Do not send the existing password or any temporary password by email.</li>
+                  <li>Support may ask the parent or account holder to confirm account information before making changes.</li>
+                  <li>A password reset should create a new secure password or a time-limited reset link; the existing password should never be revealed.</li>
+                </ul>
+                <div class="notice-box warning"><strong>Security reminder:</strong> PEM Tutoring will not need to know the learner's current password to reset access.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="data" data-keywords="what information collect data username account subscription results answers scores timing device browser ip support" style="--faq-accent:#0f766e;--faq-soft:#ecfdf5">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"></ellipse><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"></path></svg></span>
+                <span class="faq-summary-copy"><strong>What information is collected?</strong><span>Data and privacy</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>The service may hold the minimum information needed to operate the learner account and provide the learning service. This can include:</p>
+                <ul>
+                  <li><strong>Account information:</strong> private username, securely protected password record, account status, access dates and subscription or entitlement details.</li>
+                  <li><strong>Learning information:</strong> practice progress, exam attempts, raw scores, percentages, timings, answers, topic breakdowns, feedback and reports.</li>
+                  <li><strong>Security information:</strong> sign-in and sign-out times, active session details, device and browser information, and limited network or location indicators used to protect the account.</li>
+                  <li><strong>Support information:</strong> messages sent to support and actions taken to resolve the request.</li>
+                </ul>
+                <div class="notice-box"><strong>Data minimisation:</strong> parents and learners should avoid providing names or other personal details that are not required for the account or support request.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="data" data-keywords="how use data purpose authenticate access save progress performance security support advertising sell sharing providers" style="--faq-accent:#0f766e;--faq-soft:#ecfdf5">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v5c0 5 3.4 8.3 8 9 4.6-.7 8-4 8-9V7l-8-4Z"></path><path d="m9 12 2 2 4-5"></path></svg></span>
+                <span class="faq-summary-copy"><strong>How is the information used?</strong><span>Data and privacy</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Account and learning information is used to:</p>
+                <ul>
+                  <li>confirm that the learner is allowed to access the service;</li>
+                  <li>save learning activity and completed exam records;</li>
+                  <li>calculate scores, topic summaries and progress information;</li>
+                  <li>manage account access, expiry, suspension, reactivation or deletion;</li>
+                  <li>prevent unauthorised account sharing and simultaneous use;</li>
+                  <li>investigate technical or security problems and respond to support requests; and</li>
+                  <li>meet legal, accounting, safeguarding or security obligations where they apply.</li>
+                </ul>
+                <p>Learner records are intended for practice and progress reporting. They are not a formal admissions result or a guaranteed prediction of 11+ success.</p>
+                <div class="notice-box good"><strong>No third-party advertising:</strong> learner results should not be used to target third-party advertising.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="results" data-keywords="exam results performance raw score percentage date time feedback question answers topics reports practice history" style="--faq-accent:#6d28d9;--faq-soft:#f5f3ff">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"></path></svg></span>
+                <span class="faq-summary-copy"><strong>What is saved from exams and practice?</strong><span>Results and feedback</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>A completed exam record may contain the date and time, subject, paper identifier, raw score, total marks, percentage, completion time, answers, correct answers, topic breakdown and stored feedback.</p>
+                <ul>
+                  <li>Completed exam attempts are shown in <strong>My Performance</strong>.</li>
+                  <li>The performance history is intended to show change over time and identify topics that need more work.</li>
+                  <li>Practice activity may save progress for continuity, but only completed exam records should populate the formal attempt history on the performance page.</li>
+                  <li>Scores and summaries are calculated using programmed marking and arithmetic, not external AI analysis.</li>
+                </ul>
+                <div class="notice-box">If a completed result is missing or appears incorrect, contact support with the username, subject, approximate completion time and paper identifier if available.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="data" data-keywords="rights uk gdpr data protection act access correction erase erasure restrict object complaint ico privacy request" style="--faq-accent:#0f766e;--faq-soft:#ecfdf5">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l4 4v14H4V3h4Z"></path><path d="M8 11h8M8 15h8M8 7h4"></path></svg></span>
+                <span class="faq-summary-copy"><strong>Data protection and your rights</strong><span>Data and privacy</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Personal information must be handled in line with applicable UK data protection law, including the UK GDPR and the Data Protection Act 2018.</p>
+                <p>Depending on the circumstances and the reason the information is being used, the account holder may be able to ask for access to personal information, correction of inaccurate information, erasure, restriction of processing, portability or an objection to certain uses.</p>
+                <ul>
+                  <li>Requests can be sent to <a href="mailto:info@pemtutoring.co.uk?subject=MathBase%20Prep%20data%20request">info@pemtutoring.co.uk</a>.</li>
+                  <li>Identity and authority to act for the learner may need to be verified before account information is released or changed.</li>
+                  <li>Some rights are not absolute and can depend on the lawful basis, legal obligations and the information concerned.</li>
+                  <li>Individuals may also have the right to raise a concern with the Information Commissioner's Office.</li>
+                </ul>
+                <div class="notice-box"><strong>Important:</strong> this help section is a summary and does not replace the full privacy notice.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="data" data-keywords="retention how long keep data delete backups legal security active account records" style="--faq-accent:#0f766e;--faq-soft:#ecfdf5">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+                <span class="faq-summary-copy"><strong>How long is information kept?</strong><span>Data and privacy</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Information should be kept only for as long as it is needed for account management, learning records, service security, support and any applicable legal obligations.</p>
+                <ul>
+                  <li>Active account records may be retained while the learner continues to use the service.</li>
+                  <li>Security and support records may be kept for a limited period to investigate problems, prevent misuse or maintain an audit trail.</li>
+                  <li>When information is no longer needed, it should be deleted or anonymised in line with the retention schedule.</li>
+                  <li>Deletion from live systems may not remove information immediately from protected backups; backup copies should expire through the normal retention cycle.</li>
+                </ul>
+                <div class="notice-box">The formal privacy notice and retention schedule should state the exact periods that apply to each category of information.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="security" data-keywords="sharing simultaneous login two devices location active session inactivity are you still there five minutes two minutes logout" style="--faq-accent:#b45309;--faq-soft:#fff7ed">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8a4 4 0 1 1 8 0M3 21a8 8 0 0 1 16 0"></path><path d="M18 8h3M19.5 6.5v3"></path></svg></span>
+                <span class="faq-summary-copy"><strong>Account sharing, active sessions and inactivity</strong><span>Account security</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Each username and password is for the authorised learner account and should not be shared with friends or extended family.</p>
+                <ul>
+                  <li>Only one active session should be permitted for an account at a time.</li>
+                  <li>A simultaneous sign-in from another device or location may be blocked or may end the existing session.</li>
+                  <li>After five minutes without activity, the service should ask whether the learner is still present.</li>
+                  <li>If there is no response within the following two minutes, the session should end automatically.</li>
+                  <li>An administrator may view whether an account is online or offline and may end an active session where necessary.</li>
+                </ul>
+                <div class="notice-box warning"><strong>Keep credentials private:</strong> account sharing can prevent the authorised learner from signing in and may lead to account restrictions.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="account" data-keywords="suspend suspended reactivate reactivated delete deleted clear data lose results progress blank account" style="--faq-accent:#b42318;--faq-soft:#fff1f2">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m8 8 8 8M16 8l-8 8"></path></svg></span>
+                <span class="faq-summary-copy"><strong>Suspended, reactivated or deleted accounts</strong><span>Account access</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>A suspended account cannot be used to sign in. Under the current account policy, suspension clears the learner's saved quiz, exam, answer, feedback and progress records.</p>
+                <ul>
+                  <li>If the account is later reactivated, it starts again without the previous learning history.</li>
+                  <li>Cleared learning data cannot be restored from the learner account.</li>
+                  <li>Permanent deletion removes the account and access and is intended to be irreversible.</li>
+                  <li>Limited administrative, legal, security or backup records may remain for the period required by the retention policy.</li>
+                </ul>
+                <div class="notice-box warning"><strong>Before requesting suspension or deletion:</strong> download or record any results that need to be retained.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="technical" data-keywords="technical problem browser phone tablet laptop ipad page not loading save error screenshot cache cookies javascript connection" style="--faq-accent:#6d28d9;--faq-soft:#f5f3ff">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></span>
+                <span class="faq-summary-copy"><strong>A page is not loading or working correctly</strong><span>Technical support</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Try the following before contacting support:</p>
+                <ul>
+                  <li>Check the internet connection and refresh the page once.</li>
+                  <li>Use a current version of Chrome, Edge, Safari or Firefox.</li>
+                  <li>Make sure JavaScript and essential cookies or browser storage are allowed.</li>
+                  <li>Close unused tabs or applications if the device is running slowly.</li>
+                  <li>Do not repeatedly submit an exam while the page is processing or saving.</li>
+                  <li>If the problem continues, take a screenshot and note the page, browser, device and approximate time.</li>
+                </ul>
+                <div class="notice-box">Recovery of unsaved work depends on whether the most recent response or result was successfully saved to the server.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="data" data-keywords="cookies local storage session essential analytics marketing consent remember login" style="--faq-accent:#0f766e;--faq-soft:#ecfdf5">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 8h.01M15 9h.01M8 14h.01M13 15h.01M16 13h.01"></path></svg></span>
+                <span class="faq-summary-copy"><strong>Cookies and browser storage</strong><span>Data and privacy</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Essential cookies or similar browser storage may be used to keep the learner signed in, protect the session, remember necessary preferences and support continuity between pages.</p>
+                <ul>
+                  <li>Essential storage is required for core account and security functions.</li>
+                  <li>Non-essential analytics or marketing technologies should be explained separately and used only where the required notice or consent has been provided.</li>
+                  <li>Logging out should end the active session and remove or invalidate the relevant authentication data.</li>
+                </ul>
+                <div class="notice-box">The cookie notice should identify the technologies actually used in the production service and their expiry periods.</div>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="technical" data-keywords="contact support email help account data password technical response info pem tutoring" style="--faq-accent:#173b82;--faq-soft:#eef4ff">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="m4 6 8 6 8-6"></path></svg></span>
+                <span class="faq-summary-copy"><strong>How do I contact support?</strong><span>Technical and account support</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>Email <a href="mailto:info@pemtutoring.co.uk?subject=MathBase%20Prep%20support%20request">info@pemtutoring.co.uk</a> for account access, password resets, data requests, missing results or technical issues.</p>
+                <ul>
+                  <li>Use the learner username rather than the learner's full name where possible.</li>
+                  <li>Explain what happened and what should have happened.</li>
+                  <li>Include the page, subject or activity and the approximate date and time.</li>
+                  <li>State the device and browser being used.</li>
+                  <li>Do not include passwords, payment card details or unrelated personal information.</li>
+                </ul>
+                <div class="notice-box good"><strong>Account privacy:</strong> support may need to verify the parent or account holder before discussing or changing protected account information.</div>
+              </div>
+            </details>
+
+            <p class="no-results" id="noResults" hidden>No help topics match that search or category. Clear the search or choose another category.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="developer-notes">
+      <strong>Developer notes — do not include on real pages</strong>
+      <p><b>Production route and navigation:</b> this file uses the established Dashboard, Practice, Exams, My Performance and prototype Log out destinations. The prototype Help route is <code>https://mathbase1.github.io/help/</code> and is linked from every signed-in navigation bar. For production, replace prototype GitHub destinations with the authenticated production routes. Production logout must revoke the server-side session before returning to the production login route.</p>
+      <p><b>Data entering this page:</b> the public help content should come from an approved, versioned help-content source or CMS. The support email, privacy-notice version, cookie-notice version, retention summary and service-status messages should come from central configuration rather than being duplicated across HTML files. The only learner-specific value this page may need is the authenticated account identifier for pre-filling a support ticket; it should not load detailed exam answers or results merely to display help content.</p>
+      <p><b>Account and learning data described by the page:</b> the production backend may hold pseudonymous username, password hash, account type/status, access or subscription dates, exam and practice records, answers, marks, feedback, reports, session identifiers, login/logout times, last activity, device/browser information, limited IP or coarse-region security data, support tickets and an administrator audit trail. The formal privacy notice must accurately identify the controller, purposes, lawful bases, recipients/processors, international transfers, retention periods and rights that actually apply.</p>
+      <p><b>Password reset:</b> implement a generic reset response that does not reveal whether an account exists. Use a cryptographically random, single-use, short-lived token; store only a hash of the token; invalidate previous tokens; rate-limit requests; record the security event; revoke existing sessions after a successful reset; and never email or display an existing password.</p>
+      <p><b>Support workflow:</b> a support request should create a server-side ticket linked to the authenticated username or a verified parent/account-holder identity. Store the category, message, page, timestamp, device/browser and attachments only where necessary. Strip hidden metadata where appropriate, restrict staff access by role, scan uploads, keep a complete action history and apply a documented retention period.</p>
+      <p><b>Privacy requests:</b> provide a protected workflow for access, correction, erasure, restriction, portability, objection and complaints where applicable. Verify identity and authority to act for a child before disclosure or destructive action. Log the request, deadline, decision, data searched, response and any lawful reason for retaining information. This help page is not a substitute for a product-specific privacy notice, child-friendly privacy information, retention schedule or cookie notice.</p>
+      <p><b>Session and account-sharing controls:</b> enforce the one-active-session rule on the server using a central session store. Track session ID, account ID, issued/last-activity/expiry times, device summary and revocation reason. After five minutes of inactivity, present an accessible “Are you still there?” dialog; allow two minutes for a response; then revoke the session server-side and redirect to login. A second login must be rejected or must revoke the earlier session according to the final policy. Administrators must be able to see online/offline state and force logout without exposing unnecessary location data.</p>
+      <p><b>Suspension, reactivation and deletion:</b> the visible wording currently reflects the requested policy that suspension clears learner quiz, exam, answer, feedback and progress data and reactivation starts with no prior learning history. Before production, confirm this destructive policy against contractual, safeguarding, accounting, backup and data-protection requirements. Use transactional backend operations, explicit administrator confirmation, immutable audit events, backup-expiry rules and clear notice to the account holder. Permanent deletion must be separately authorised and should never rely on client-side JavaScript.</p>
+      <p><b>Cookies and security:</b> use secure, HttpOnly, SameSite session cookies over HTTPS; CSRF protection; strong password hashing; rate limiting; account lockout controls; least-privilege roles; encryption in transit and at rest; secret management; database backups; monitoring; alerting; vulnerability patching; and a tested breach-response process. Only describe cookies and analytics that are actually deployed.</p>
+      <p><b>Content governance and accessibility:</b> assign an owner and review date to every help article. Keep legal and operational text synchronised with the live product. Preserve the native <code>details</code>/<code>summary</code> keyboard behaviour, visible focus, live search status, reduced-motion support and responsive layout. Test with keyboard-only use, screen readers, 200%/400% zoom, iOS Safari, Android TalkBack, tablet layouts and managed school browsers before release.</p>
+    </aside>
+
+    <footer class="page-footer">
+      <span>© <span id="currentYear"></span> MathBase Prep</span>
+      <a href="mailto:info@pemtutoring.co.uk?subject=MathBase%20Prep%20support%20request">Support: info@pemtutoring.co.uk</a>
+    </footer>
+  </div>
+
+  <script>
+    const MATHBASE_PROFILE_KEY = "mathbase11PlusLearner";
+    const MATHBASE_AUTH_KEY = "mathbase11PlusAuthenticated";
+
+    function logOutMathBase(event) {
+      if (event) event.preventDefault();
+      try {
+        sessionStorage.removeItem(MATHBASE_AUTH_KEY);
+        localStorage.removeItem(MATHBASE_PROFILE_KEY);
+      } catch (error) { /* Redirect regardless. */ }
+      window.location.assign("https://mathbase1.github.io/11plus-pem/");
+    }
+
+    function initialisePrimaryNavigation() {
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.getElementById("primaryNav");
+      if (!toggle || !nav) return;
+      const close = () => {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open navigation menu");
+      };
+      toggle.addEventListener("click", () => {
+        const nextOpen = !nav.classList.contains("is-open");
+        nav.classList.toggle("is-open", nextOpen);
+        toggle.setAttribute("aria-expanded", String(nextOpen));
+        toggle.setAttribute("aria-label", nextOpen ? "Close navigation menu" : "Open navigation menu");
+      });
+      document.addEventListener("click", (event) => {
+        if (!nav.contains(event.target) && !toggle.contains(event.target)) close();
+      });
+      document.addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
+      nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
+    }
+
+    function initialiseHelpTopics() {
+      const search = document.getElementById("helpSearch");
+      const clearSearch = document.getElementById("clearSearch");
+      const items = Array.from(document.querySelectorAll(".faq-item"));
+      const categoryButtons = Array.from(document.querySelectorAll(".category-button"));
+      const status = document.getElementById("searchStatus");
+      const count = document.getElementById("questionCount");
+      const noResults = document.getElementById("noResults");
+      const expandAll = document.getElementById("expandAll");
+      const collapseAll = document.getElementById("collapseAll");
+      let activeCategory = "all";
+
+      const normalise = (value) => String(value || "").toLowerCase().replace(/\s+/g, " ").trim();
+      const visibleItems = () => items.filter((item) => !item.hidden);
+
+      function applyFilters() {
+        const query = normalise(search.value);
+        let shown = 0;
+        items.forEach((item) => {
+          const categoryMatch = activeCategory === "all" || item.dataset.category === activeCategory;
+          const searchable = normalise(`${item.textContent} ${item.dataset.keywords || ""}`);
+          const queryMatch = !query || searchable.includes(query);
+          const visible = categoryMatch && queryMatch;
+          item.hidden = !visible;
+          if (visible) {
+            shown += 1;
+            if (query) item.open = true;
+          }
+        });
+        clearSearch.hidden = !search.value;
+        noResults.hidden = shown !== 0;
+        count.textContent = `${shown} topic${shown === 1 ? "" : "s"}`;
+        status.textContent = shown === 0
+          ? "No matching help topics."
+          : query || activeCategory !== "all"
+            ? `Showing ${shown} matching help topic${shown === 1 ? "" : "s"}.`
+            : "Showing all help topics.";
+      }
+
+      search.addEventListener("input", applyFilters);
+      clearSearch.addEventListener("click", () => {
+        search.value = "";
+        search.focus();
+        applyFilters();
+      });
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeCategory = button.dataset.category || "all";
+          categoryButtons.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate === button)));
+          applyFilters();
+        });
+      });
+      expandAll.addEventListener("click", () => visibleItems().forEach((item) => { item.open = true; }));
+      collapseAll.addEventListener("click", () => visibleItems().forEach((item) => { item.open = false; }));
+      applyFilters();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initialisePrimaryNavigation();
+      initialiseHelpTopics();
+      document.querySelectorAll("[data-logout]").forEach((element) => element.addEventListener("click", logOutMathBase));
+      document.getElementById("currentYear").textContent = String(new Date().getFullYear());
+    });
+  </script>
+</body>
+</html>
+
