@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en-GB">
 <head>
@@ -616,9 +615,9 @@
           <section class="card side-card account-delete-card" aria-labelledby="deleteCardTitle">
             <div class="side-kicker">Account control</div>
             <h2 id="deleteCardTitle">Delete My Account</h2>
-            <p>Send a permanent account-deletion request to the administrator. The request must be approved before the account and learning records are erased.</p>
+            <p>Permanently delete the learner account and its learning records. Once confirmed, deletion will be completed within three working days.</p>
             <div class="deletion-status" id="deletionStatus" data-state="none" role="status" aria-live="polite">
-              <strong>No deletion request is active</strong>
+              <strong>No account deletion is scheduled</strong>
               <span>Your account remains available.</span>
             </div>
             <button class="delete-account-button" type="button" data-open-delete-account>
@@ -795,22 +794,22 @@
               </div>
             </details>
 
-            <details class="faq-item" id="deleteAccountTopic" data-category="delete" data-keywords="delete my account account deletion request erase erasure remove profile admin approval permanent close account parent" style="--faq-accent:#b42318;--faq-soft:#fff1f2">
+            <details class="faq-item" id="deleteAccountTopic" data-category="delete" data-keywords="delete my account account deletion erase erasure remove profile permanent close account parent three working days" style="--faq-accent:#b42318;--faq-soft:#fff1f2">
               <summary>
                 <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path></svg></span>
                 <span class="faq-summary-copy"><strong>Delete My Account</strong><span>Permanent account deletion</span></span>
                 <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
               </summary>
               <div class="faq-content">
-                <p>The parent or account holder can send an account-deletion request from this page. The request is sent to the administrator for approval before the account and learning records are permanently removed.</p>
+                <p>The parent or account holder can permanently delete the learner account from this page. Once confirmed, the account and learning records will be permanently deleted within three working days.</p>
                 <ul>
                   <li>Select <strong>Delete My Account</strong> and review the warning.</li>
-                  <li>Select <strong>Yes, delete account</strong> to submit the request.</li>
-                  <li>The request is shown as <strong>Pending administrator approval</strong> until an administrator reviews it.</li>
-                  <li>After approval, access is ended and the account, exam attempts, practice progress, answers, feedback and reports are permanently removed in line with the retention policy.</li>
+                  <li>Select <strong>Yes, permanently delete account</strong> to confirm.</li>
+                  <li>The account will be shown as <strong>Deletion scheduled</strong> while the deletion is being completed.</li>
+                  <li>The account may remain accessible during this period. Within three working days, access will end and exam attempts, practice progress, answers, feedback and reports will be permanently removed in line with the retention policy.</li>
                   <li>When deletion is complete, the status changes to <strong>Your account has been deleted</strong>.</li>
                 </ul>
-                <div class="notice-box warning"><strong>Permanent action:</strong> save any results that need to be kept before submitting the request. Deleted learning records cannot be restored to the learner account.</div>
+                <div class="notice-box warning"><strong>Permanent action:</strong> save any results that need to be kept before confirming deletion. Deleted learning records cannot be restored to the learner account.</div>
                 <button class="inline-delete-action" type="button" data-open-delete-account><span data-delete-label>Delete My Account</span></button>
               </div>
             </details>
@@ -899,28 +898,28 @@
       <section id="deleteConfirmStep">
         <header class="delete-dialog-head">
           <div>
-            <h2 id="deleteDialogTitle">Delete my account?</h2>
-            <p>This sends a permanent deletion request to the administrator.</p>
+            <h2 id="deleteDialogTitle">Are you sure you want to delete your account?</h2>
+            <p>Your account will be permanently deleted within three working days.</p>
           </div>
           <button class="dialog-close" type="button" data-close-delete-dialog aria-label="Close account deletion dialog">×</button>
         </header>
         <div class="delete-dialog-body">
           <div class="delete-warning-panel">
             <strong>Please read this before continuing</strong>
-            The account is not finally erased until an administrator approves and completes the request. Once completed, the deletion is intended to be irreversible.
+            Once confirmed, the deletion is intended to be irreversible. The account may remain accessible while deletion is being completed.
           </div>
           <ul class="delete-impact-list">
-            <li>Account access will be ended when the administrator approves the request.</li>
-            <li>Exam attempts, practice progress, answers, feedback and reports will be permanently removed from the learner account.</li>
+            <li>The account will be scheduled for permanent deletion as soon as you confirm.</li>
+            <li>Within three working days, account access will end and exam attempts, practice progress, answers, feedback and reports will be permanently removed from the learner account.</li>
             <li>Any information that must lawfully be retained will be handled under the formal retention policy.</li>
           </ul>
           <div class="delete-account-summary">
-            <span>Account requesting deletion</span>
+            <span>Account to be permanently deleted</span>
             <strong id="deleteAccountAlias">CK223</strong>
           </div>
           <div class="delete-dialog-actions">
             <button class="dialog-secondary" type="button" data-close-delete-dialog>Cancel</button>
-            <button class="dialog-danger" id="confirmDeleteAccount" type="button">Yes, delete account</button>
+            <button class="dialog-danger" id="confirmDeleteAccount" type="button">Yes, permanently delete account</button>
           </div>
         </div>
       </section>
@@ -928,19 +927,20 @@
       <section class="delete-success" id="deleteSuccessStep" hidden>
         <header class="delete-dialog-head">
           <div>
-            <h2 id="deleteSuccessTitle">Deletion request received</h2>
-            <p>The request has been recorded for administrator review.</p>
+            <h2 id="deleteSuccessTitle">Account deletion scheduled</h2>
+            <p>Your account will be permanently deleted within three working days.</p>
           </div>
           <button class="dialog-close" type="button" data-close-delete-dialog aria-label="Close account deletion confirmation">×</button>
         </header>
         <div class="delete-dialog-body">
           <span class="success-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
-          <h3>Your account is marked for deletion</h3>
-          <p>Your request has been sent to the administrator. The account and learning data will be permanently removed after approval.</p>
-          <div class="request-sheet" aria-label="Deletion request details">
-            <div class="request-line"><span>Status</span><strong>Pending administrator approval</strong></div>
-            <div class="request-line"><span>Request reference</span><strong id="deleteRequestReference">—</strong></div>
-            <div class="request-line"><span>Submitted</span><strong id="deleteRequestSubmitted">—</strong></div>
+          <h3>Your account will be deleted</h3>
+          <p>The account and learning data are scheduled for permanent deletion. This will be completed within three working days.</p>
+          <div class="request-sheet" aria-label="Account deletion details">
+            <div class="request-line"><span>Status</span><strong>Deletion scheduled</strong></div>
+            <div class="request-line"><span>Timeframe</span><strong>Within three working days</strong></div>
+            <div class="request-line"><span>Deletion reference</span><strong id="deleteRequestReference">—</strong></div>
+            <div class="request-line"><span>Confirmed</span><strong id="deleteRequestSubmitted">—</strong></div>
           </div>
           <div class="delete-dialog-actions">
             <button class="dialog-primary" type="button" data-close-delete-dialog>Close</button>
@@ -958,8 +958,8 @@
       <p><b>Support workflow:</b> a support request should create a server-side ticket linked to the authenticated username or a verified parent/account-holder identity. Store the category, message, page, timestamp, device/browser and attachments only where necessary. Strip hidden metadata where appropriate, restrict staff access by role, scan uploads, keep a complete action history and apply a documented retention period.</p>
       <p><b>Privacy requests:</b> provide a protected workflow for access, correction, erasure, restriction, portability, objection and complaints where applicable. Verify identity and authority to act for a child before disclosure or destructive action. Log the request, deadline, decision, data searched, response and any lawful reason for retaining information. This help page is not a substitute for a product-specific privacy notice, child-friendly privacy information, retention schedule or cookie notice.</p>
       <p><b>Session and account-sharing controls:</b> enforce the one-active-session rule on the server using a central session store. Track session ID, account ID, issued/last-activity/expiry times, device summary and revocation reason. After five minutes of inactivity, present an accessible “Are you still there?” dialog; allow two minutes for a response; then revoke the session server-side and redirect to login. A second login must be rejected or must revoke the earlier session according to the final policy. Administrators must be able to see online/offline state and force logout without exposing unnecessary location data.</p>
-      <p><b>Suspension, reactivation and deletion:</b> the visible wording currently reflects the requested policy that suspension clears learner quiz, exam, answer, feedback and progress data and reactivation starts with no prior learning history. Before production, confirm this destructive policy against contractual, safeguarding, accounting, backup and data-protection requirements. Use transactional backend operations, explicit administrator confirmation, immutable audit events, backup-expiry rules and clear notice to the account holder. Permanent deletion must be separately authorised and should never rely on client-side JavaScript.</p>
-      <p><b>Account-deletion request workflow:</b> the prototype records a mock pending request in same-origin browser storage under <code>mathbaseAccountDeletionRequestsV1</code> so the confirmation and pending-status experience can be demonstrated. That browser record is not a real deletion and must not be used in production. The real Help page must require a recent re-authentication or equivalent step-up check, verify the requester’s authority to act for the learner, send an authenticated, CSRF-protected request to a server endpoint and create a deletion-request record containing request ID, account ID, requester identity/authority, requested time, status, decision, administrator ID, approval/rejection time, completion time and any lawful-retention exceptions. The Admin console should show a dedicated pending-deletion queue with Approve and Reject actions. Approval must revoke every active session, prevent new login, delete or irreversibly anonymise the account and learning records in a transactional job, record an immutable audit event and then notify the verified account holder that the account has been deleted. Until completion, the user-facing wording must say “request submitted” or “pending administrator approval”, not claim that deletion is complete.</p>
+      <p><b>Suspension, reactivation and deletion:</b> the visible wording currently reflects the requested policy that suspension clears learner quiz, exam, answer, feedback and progress data and reactivation starts with no prior learning history. Before production, confirm this destructive policy against contractual, safeguarding, accounting, backup and data-protection requirements. Use transactional backend operations, controlled server-side authorisation, immutable audit events, backup-expiry rules and clear notice to the account holder. Permanent deletion must be securely authorised and should never rely on client-side JavaScript.</p>
+      <p><b>Account-deletion workflow:</b> the prototype records a mock scheduled deletion in same-origin browser storage under <code>mathbaseAccountDeletionRequestsV1</code> so the confirmation and scheduled-status experience can be demonstrated. That browser record is not a real deletion and must not be used in production. The real Help page must require recent re-authentication or an equivalent step-up check, verify the requester’s authority to act for the learner, send an authenticated, CSRF-protected instruction to a server endpoint and create a deletion record containing a reference, account ID, requester identity/authority, confirmation time, target completion time, internal processing status, completion time and any lawful-retention exceptions. Internal administrator tooling may process or review the deletion without exposing that workflow in the parent-facing interface. The backend must complete the deletion within the stated three-working-day period, revoke active sessions, prevent further login at the appropriate stage, delete or irreversibly anonymise the account and learning records in a transactional job, record an immutable audit event and notify the verified account holder when deletion is complete. Customer-facing wording must say <em>Deletion scheduled</em> and <em>will be permanently deleted within three working days</em>; it must not mention administrator approval.</p>
       <p><b>Cookies and security:</b> use secure, HttpOnly, SameSite session cookies over HTTPS; CSRF protection; strong password hashing; rate limiting; account lockout controls; least-privilege roles; encryption in transit and at rest; secret management; database backups; monitoring; alerting; vulnerability patching; and a tested breach-response process. Only describe cookies and analytics that are actually deployed.</p>
       <p><b>Content governance and accessibility:</b> assign an owner and review date to every help article. Keep legal and operational text synchronised with the live product. Preserve the native <code>details</code>/<code>summary</code> keyboard behaviour, visible focus, live search status, reduced-motion support and responsive layout. Test with keyboard-only use, screen readers, 200%/400% zoom, iOS Safari, Android TalkBack, tablet layouts and managed school browsers before release.</p>
     </aside>
@@ -1162,23 +1162,23 @@
         const request = latestRequest();
         if (!request) {
           statusBox.dataset.state = "none";
-          statusBox.innerHTML = "<strong>No deletion request is active</strong><span>Your account remains available.</span>";
+          statusBox.innerHTML = "<strong>No account deletion is scheduled</strong><span>Your account remains available.</span>";
           setOpenerState(false, "Delete My Account");
           return;
         }
-        const state = statusLabel(String(request.status || "pending_admin_approval"));
+        const state = statusLabel(String(request.status || "deletion_scheduled"));
         if (state === "completed") {
           statusBox.dataset.state = "completed";
           statusBox.innerHTML = `<strong>Your account has been deleted</strong><span>Completed ${formatDeletionDate(request.completedAt || request.updatedAt || request.requestedAt)} · ${request.requestId}</span>`;
           setOpenerState(true, "Account deleted");
         } else if (state === "closed") {
           statusBox.dataset.state = "none";
-          statusBox.innerHTML = `<strong>Previous request ${String(request.status).toLowerCase()}</strong><span>You may submit a new request if needed.</span>`;
+          statusBox.innerHTML = `<strong>Previous deletion ${String(request.status).toLowerCase()}</strong><span>You may schedule a new deletion if needed.</span>`;
           setOpenerState(false, "Delete My Account");
         } else {
           statusBox.dataset.state = "pending";
-          statusBox.innerHTML = `<strong>Pending administrator approval</strong><span>${request.requestId} · submitted ${formatDeletionDate(request.requestedAt)}</span>`;
-          setOpenerState(false, "View deletion request");
+          statusBox.innerHTML = `<strong>Deletion scheduled</strong><span>${request.requestId} · confirmed ${formatDeletionDate(request.requestedAt)} · within three working days</span>`;
+          setOpenerState(false, "View deletion details");
         }
       }
 
@@ -1217,7 +1217,7 @@
               requestId: createDeletionReference(),
               accountAlias: alias,
               requestedAt: new Date().toISOString(),
-              status: "pending_admin_approval",
+              status: "deletion_scheduled",
               source: "help-page",
               prototype: true
             };
