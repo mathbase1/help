@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b214a">
-  <meta name="description" content="MathBase Prep help and support information for learner accounts, passwords, data protection, exam records and technical issues.">
+  <meta name="description" content="MathBase Prep help and support information for learner accounts, passwords, data protection, exam records, account deletion and technical issues.">
   <title>Help and Support | MathBase Prep</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -265,6 +265,159 @@
     .privacy-summary { border-left: 5px solid var(--teal); }
     .privacy-summary strong { color: var(--ink); }
 
+    .account-delete-card {
+      position: relative;
+      overflow: hidden;
+      border-color: #fecaca;
+      background: linear-gradient(160deg,#fff 0%,#fff8f8 100%);
+    }
+    .account-delete-card::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      right: -78px;
+      bottom: -82px;
+      border-radius: 50%;
+      background: rgba(180,35,24,.065);
+      pointer-events: none;
+    }
+    .account-delete-card .side-kicker { color: var(--red); }
+    .account-delete-card .side-kicker::before { background: var(--red); }
+    .delete-account-button {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 47px;
+      margin-top: 14px;
+      padding: 11px 13px;
+      border: 1px solid var(--red);
+      border-radius: 13px;
+      background: var(--red);
+      color: #fff;
+      font-size: .76rem;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(180,35,24,.18);
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+    .delete-account-button:hover:not(:disabled) { transform: translateY(-1px); background: #8f1c15; box-shadow: 0 13px 28px rgba(180,35,24,.22); }
+    .delete-account-button:disabled { cursor: not-allowed; opacity: .68; box-shadow: none; }
+    .delete-account-button svg { width: 16px; height: 16px; }
+    .deletion-status {
+      display: grid;
+      gap: 4px;
+      margin-top: 12px;
+      padding: 11px 12px;
+      border: 1px solid #fed7aa;
+      border-radius: 13px;
+      background: #fff7ed;
+      color: #7c2d12;
+      font-size: .68rem;
+      line-height: 1.48;
+    }
+    .deletion-status strong { color: #7c2d12; font-size: .7rem; }
+    .deletion-status[data-state="completed"] { border-color: #bce6d2; background: #ecfdf5; color: #065f46; }
+    .deletion-status[data-state="completed"] strong { color: #065f46; }
+    .deletion-status[data-state="none"] { border-color: var(--line); background: var(--surface-soft); color: var(--muted); }
+    .deletion-status[data-state="none"] strong { color: var(--ink-soft); }
+    .inline-delete-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      margin-top: 14px;
+      padding: 10px 13px;
+      border: 1px solid var(--red);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--red);
+      font-size: .73rem;
+      font-weight: 900;
+    }
+    .inline-delete-action:hover:not(:disabled) { background: #fff1f2; }
+    .inline-delete-action:disabled { cursor: not-allowed; opacity: .64; }
+
+    .account-delete-dialog {
+      width: min(610px,calc(100% - 24px));
+      max-height: calc(100vh - 32px);
+      padding: 0;
+      overflow: auto;
+      border: 0;
+      border-radius: 24px;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 38px 110px rgba(8,18,38,.34);
+    }
+    .account-delete-dialog::backdrop { background: rgba(8,18,38,.68); backdrop-filter: blur(5px); }
+    .delete-dialog-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 21px 17px;
+      border-bottom: 1px solid #fecaca;
+      background: linear-gradient(180deg,#fff7f7 0%,#fff 100%);
+    }
+    .delete-dialog-head h2 { margin-bottom: 5px; font-size: 1.38rem; letter-spacing: -.045em; }
+    .delete-dialog-head p { margin-bottom: 0; color: var(--muted); font-size: .76rem; line-height: 1.5; }
+    .dialog-close {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 39px;
+      height: 39px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 1.15rem;
+    }
+    .delete-dialog-body { padding: 21px; }
+    .delete-warning-panel { padding: 15px; border: 1px solid #fecaca; border-radius: 16px; background: #fff1f2; color: #7f1d1d; font-size: .76rem; line-height: 1.58; }
+    .delete-warning-panel strong { display: block; margin-bottom: 5px; color: #991b1b; }
+    .delete-impact-list { display: grid; gap: 9px; margin: 15px 0 0; padding: 0; list-style: none; }
+    .delete-impact-list li { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 9px; color: #475467; font-size: .74rem; line-height: 1.5; }
+    .delete-impact-list li::before { content: ""; width: 8px; height: 8px; margin-top: .45em; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px rgba(180,35,24,.08); }
+    .delete-account-summary { margin-top: 15px; padding: 13px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-soft); }
+    .delete-account-summary span, .delete-account-summary strong { display: block; }
+    .delete-account-summary span { color: var(--muted); font-size: .64rem; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
+    .delete-account-summary strong { margin-top: 5px; overflow-wrap: anywhere; font-size: .84rem; }
+    .delete-dialog-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 18px; }
+    .dialog-secondary, .dialog-danger, .dialog-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 45px;
+      padding: 10px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+      font-size: .75rem;
+      font-weight: 900;
+    }
+    .dialog-secondary:hover { background: var(--surface-soft); }
+    .dialog-danger { border-color: var(--red); background: var(--red); color: #fff; }
+    .dialog-danger:hover { background: #8f1c15; }
+    .dialog-primary { border-color: var(--navy); background: var(--navy); color: #fff; }
+    .dialog-primary:hover { background: var(--navy-dark); }
+    .delete-success { text-align: center; }
+    .success-mark { display: grid; place-items: center; width: 62px; height: 62px; margin: 0 auto 14px; border-radius: 20px; background: #ecfdf5; color: var(--green); }
+    .success-mark svg { width: 31px; height: 31px; }
+    .delete-success h3 { margin-bottom: 7px; font-size: 1.35rem; letter-spacing: -.045em; }
+    .delete-success > p { margin: 0 auto; max-width: 48ch; color: var(--muted); font-size: .78rem; line-height: 1.58; }
+    .request-sheet { display: grid; gap: 0; margin-top: 17px; padding: 4px 14px; border: 1px solid #d7e5ff; border-radius: 16px; background: #f3f7ff; text-align: left; }
+    .request-line { display: grid; grid-template-columns: 145px minmax(0,1fr); gap: 12px; padding: 11px 0; border-bottom: 1px solid #d7e5ff; }
+    .request-line:last-child { border-bottom: 0; }
+    .request-line span { color: var(--muted); font-size: .65rem; font-weight: 850; }
+    .request-line strong { overflow-wrap: anywhere; font-size: .73rem; }
+
     .faq-card { min-width: 0; overflow: hidden; }
     .faq-header { padding: 20px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg,#fff 0%,#fbfcfe 100%); }
     .faq-title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 15px; }
@@ -333,6 +486,7 @@
       .hero-contact { width: min(100%,620px); }
       .help-layout { grid-template-columns: 1fr; }
       .support-sidebar { position: static; grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .account-delete-card { grid-column: 1 / -1; }
     }
     @media (max-width: 900px) {
       .topbar { position: relative; top: auto; }
@@ -373,6 +527,11 @@
       .faq-icon { width: 36px; height: 36px; border-radius: 11px; }
       .faq-content { padding: 0 14px 15px; }
       .faq-content::before { content: ""; display: block; height: 1px; }
+      .account-delete-dialog { border-radius: 20px; }
+      .delete-dialog-head, .delete-dialog-body { padding: 17px; }
+      .delete-dialog-actions { display: grid; grid-template-columns: 1fr; }
+      .delete-dialog-actions button { width: 100%; }
+      .request-line { grid-template-columns: 1fr; gap: 4px; }
       .developer-notes { padding: 16px; }
       .page-footer { align-items: flex-start; flex-direction: column; }
     }
@@ -412,7 +571,7 @@
         <div>
           <div class="eyebrow">Help and support</div>
           <h1 id="pageTitle">Answers when you need them.</h1>
-          <p class="lead">Find clear guidance about account access, passwords, learner records, data protection, exam results, security and technical support.</p>
+          <p class="lead">Find clear guidance about account access, passwords, learner records, data protection, exam results, account deletion, security and technical support.</p>
         </div>
         <aside class="hero-contact" aria-labelledby="supportTitle">
           <span class="hero-contact-icon" aria-hidden="true">
@@ -453,6 +612,20 @@
             <p><strong>Account and learning information is used to provide access, save results, show progress, protect the service and respond to support requests.</strong></p>
             <p>This page is a plain-English summary. The formal privacy notice should be read for the complete legal information.</p>
           </section>
+
+          <section class="card side-card account-delete-card" aria-labelledby="deleteCardTitle">
+            <div class="side-kicker">Account control</div>
+            <h2 id="deleteCardTitle">Delete My Account</h2>
+            <p>Send a permanent account-deletion request to the administrator. The request must be approved before the account and learning records are erased.</p>
+            <div class="deletion-status" id="deletionStatus" data-state="none" role="status" aria-live="polite">
+              <strong>No deletion request is active</strong>
+              <span>Your account remains available.</span>
+            </div>
+            <button class="delete-account-button" type="button" data-open-delete-account>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path></svg>
+              <span data-delete-label>Delete My Account</span>
+            </button>
+          </section>
         </aside>
 
         <section class="card faq-card" aria-labelledby="faqTitle">
@@ -462,13 +635,13 @@
                 <h2 id="faqTitle">Help topics</h2>
                 <p>Search the guidance or open any section to read the full answer.</p>
               </div>
-              <span class="question-count" id="questionCount">11 topics</span>
+              <span class="question-count" id="questionCount">12 topics</span>
             </div>
 
             <div class="search-wrap">
               <label class="sr-only" for="helpSearch">Search help topics</label>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-              <input id="helpSearch" type="search" autocomplete="off" placeholder="Search passwords, data, results, security or technical help">
+              <input id="helpSearch" type="search" autocomplete="off" placeholder="Search passwords, data, results, deletion, security or technical help">
               <button class="clear-search" id="clearSearch" type="button" aria-label="Clear help search" hidden>×</button>
             </div>
 
@@ -476,6 +649,7 @@
               <div class="category-tabs" aria-label="Filter help topics">
                 <button class="category-button" type="button" data-category="all" aria-pressed="true">All</button>
                 <button class="category-button" type="button" data-category="account" aria-pressed="false">Accounts</button>
+                <button class="category-button" type="button" data-category="delete" aria-pressed="false" style="border-color:#fecaca;color:#b42318">Delete account</button>
                 <button class="category-button" type="button" data-category="data" aria-pressed="false">Data and privacy</button>
                 <button class="category-button" type="button" data-category="results" aria-pressed="false">Results</button>
                 <button class="category-button" type="button" data-category="security" aria-pressed="false">Security</button>
@@ -621,6 +795,26 @@
               </div>
             </details>
 
+            <details class="faq-item" id="deleteAccountTopic" data-category="delete" data-keywords="delete my account account deletion request erase erasure remove profile admin approval permanent close account parent" style="--faq-accent:#b42318;--faq-soft:#fff1f2">
+              <summary>
+                <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path></svg></span>
+                <span class="faq-summary-copy"><strong>Delete My Account</strong><span>Permanent account deletion</span></span>
+                <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </summary>
+              <div class="faq-content">
+                <p>The parent or account holder can send an account-deletion request from this page. The request is sent to the administrator for approval before the account and learning records are permanently removed.</p>
+                <ul>
+                  <li>Select <strong>Delete My Account</strong> and review the warning.</li>
+                  <li>Select <strong>Yes, delete account</strong> to submit the request.</li>
+                  <li>The request is shown as <strong>Pending administrator approval</strong> until an administrator reviews it.</li>
+                  <li>After approval, access is ended and the account, exam attempts, practice progress, answers, feedback and reports are permanently removed in line with the retention policy.</li>
+                  <li>When deletion is complete, the status changes to <strong>Your account has been deleted</strong>.</li>
+                </ul>
+                <div class="notice-box warning"><strong>Permanent action:</strong> save any results that need to be kept before submitting the request. Deleted learning records cannot be restored to the learner account.</div>
+                <button class="inline-delete-action" type="button" data-open-delete-account><span data-delete-label>Delete My Account</span></button>
+              </div>
+            </details>
+
             <details class="faq-item" data-category="account" data-keywords="suspend suspended reactivate reactivated delete deleted clear data lose results progress blank account" style="--faq-accent:#b42318;--faq-soft:#fff1f2">
               <summary>
                 <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m8 8 8 8M16 8l-8 8"></path></svg></span>
@@ -701,16 +895,71 @@
       </section>
     </main>
 
+    <dialog class="account-delete-dialog" id="deleteAccountDialog" aria-labelledby="deleteDialogTitle">
+      <section id="deleteConfirmStep">
+        <header class="delete-dialog-head">
+          <div>
+            <h2 id="deleteDialogTitle">Delete my account?</h2>
+            <p>This sends a permanent deletion request to the administrator.</p>
+          </div>
+          <button class="dialog-close" type="button" data-close-delete-dialog aria-label="Close account deletion dialog">×</button>
+        </header>
+        <div class="delete-dialog-body">
+          <div class="delete-warning-panel">
+            <strong>Please read this before continuing</strong>
+            The account is not finally erased until an administrator approves and completes the request. Once completed, the deletion is intended to be irreversible.
+          </div>
+          <ul class="delete-impact-list">
+            <li>Account access will be ended when the administrator approves the request.</li>
+            <li>Exam attempts, practice progress, answers, feedback and reports will be permanently removed from the learner account.</li>
+            <li>Any information that must lawfully be retained will be handled under the formal retention policy.</li>
+          </ul>
+          <div class="delete-account-summary">
+            <span>Account requesting deletion</span>
+            <strong id="deleteAccountAlias">CK223</strong>
+          </div>
+          <div class="delete-dialog-actions">
+            <button class="dialog-secondary" type="button" data-close-delete-dialog>Cancel</button>
+            <button class="dialog-danger" id="confirmDeleteAccount" type="button">Yes, delete account</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="delete-success" id="deleteSuccessStep" hidden>
+        <header class="delete-dialog-head">
+          <div>
+            <h2 id="deleteSuccessTitle">Deletion request received</h2>
+            <p>The request has been recorded for administrator review.</p>
+          </div>
+          <button class="dialog-close" type="button" data-close-delete-dialog aria-label="Close account deletion confirmation">×</button>
+        </header>
+        <div class="delete-dialog-body">
+          <span class="success-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>
+          <h3>Your account is marked for deletion</h3>
+          <p>Your request has been sent to the administrator. The account and learning data will be permanently removed after approval.</p>
+          <div class="request-sheet" aria-label="Deletion request details">
+            <div class="request-line"><span>Status</span><strong>Pending administrator approval</strong></div>
+            <div class="request-line"><span>Request reference</span><strong id="deleteRequestReference">—</strong></div>
+            <div class="request-line"><span>Submitted</span><strong id="deleteRequestSubmitted">—</strong></div>
+          </div>
+          <div class="delete-dialog-actions">
+            <button class="dialog-primary" type="button" data-close-delete-dialog>Close</button>
+          </div>
+        </div>
+      </section>
+    </dialog>
+
     <aside class="developer-notes">
       <strong>Developer notes — do not include on real pages</strong>
       <p><b>Production route and navigation:</b> this file uses the established Dashboard, Practice, Exams, My Performance and prototype Log out destinations. The prototype Help route is <code>https://mathbase1.github.io/help/</code> and is linked from every signed-in navigation bar. For production, replace prototype GitHub destinations with the authenticated production routes. Production logout must revoke the server-side session before returning to the production login route.</p>
-      <p><b>Data entering this page:</b> the public help content should come from an approved, versioned help-content source or CMS. The support email, privacy-notice version, cookie-notice version, retention summary and service-status messages should come from central configuration rather than being duplicated across HTML files. The only learner-specific value this page may need is the authenticated account identifier for pre-filling a support ticket; it should not load detailed exam answers or results merely to display help content.</p>
+      <p><b>Data entering this page:</b> the public help content should come from an approved, versioned help-content source or CMS. The support email, privacy-notice version, cookie-notice version, retention summary and service-status messages should come from central configuration rather than being duplicated across HTML files. The learner-specific values this page may need are the authenticated account identifier, the current account-deletion-request status and a support-ticket reference. It should not load detailed exam answers or results merely to display help content.</p>
       <p><b>Account and learning data described by the page:</b> the production backend may hold pseudonymous username, password hash, account type/status, access or subscription dates, exam and practice records, answers, marks, feedback, reports, session identifiers, login/logout times, last activity, device/browser information, limited IP or coarse-region security data, support tickets and an administrator audit trail. The formal privacy notice must accurately identify the controller, purposes, lawful bases, recipients/processors, international transfers, retention periods and rights that actually apply.</p>
       <p><b>Password reset:</b> implement a generic reset response that does not reveal whether an account exists. Use a cryptographically random, single-use, short-lived token; store only a hash of the token; invalidate previous tokens; rate-limit requests; record the security event; revoke existing sessions after a successful reset; and never email or display an existing password.</p>
       <p><b>Support workflow:</b> a support request should create a server-side ticket linked to the authenticated username or a verified parent/account-holder identity. Store the category, message, page, timestamp, device/browser and attachments only where necessary. Strip hidden metadata where appropriate, restrict staff access by role, scan uploads, keep a complete action history and apply a documented retention period.</p>
       <p><b>Privacy requests:</b> provide a protected workflow for access, correction, erasure, restriction, portability, objection and complaints where applicable. Verify identity and authority to act for a child before disclosure or destructive action. Log the request, deadline, decision, data searched, response and any lawful reason for retaining information. This help page is not a substitute for a product-specific privacy notice, child-friendly privacy information, retention schedule or cookie notice.</p>
       <p><b>Session and account-sharing controls:</b> enforce the one-active-session rule on the server using a central session store. Track session ID, account ID, issued/last-activity/expiry times, device summary and revocation reason. After five minutes of inactivity, present an accessible “Are you still there?” dialog; allow two minutes for a response; then revoke the session server-side and redirect to login. A second login must be rejected or must revoke the earlier session according to the final policy. Administrators must be able to see online/offline state and force logout without exposing unnecessary location data.</p>
       <p><b>Suspension, reactivation and deletion:</b> the visible wording currently reflects the requested policy that suspension clears learner quiz, exam, answer, feedback and progress data and reactivation starts with no prior learning history. Before production, confirm this destructive policy against contractual, safeguarding, accounting, backup and data-protection requirements. Use transactional backend operations, explicit administrator confirmation, immutable audit events, backup-expiry rules and clear notice to the account holder. Permanent deletion must be separately authorised and should never rely on client-side JavaScript.</p>
+      <p><b>Account-deletion request workflow:</b> the prototype records a mock pending request in same-origin browser storage under <code>mathbaseAccountDeletionRequestsV1</code> so the confirmation and pending-status experience can be demonstrated. That browser record is not a real deletion and must not be used in production. The real Help page must require a recent re-authentication or equivalent step-up check, verify the requester’s authority to act for the learner, send an authenticated, CSRF-protected request to a server endpoint and create a deletion-request record containing request ID, account ID, requester identity/authority, requested time, status, decision, administrator ID, approval/rejection time, completion time and any lawful-retention exceptions. The Admin console should show a dedicated pending-deletion queue with Approve and Reject actions. Approval must revoke every active session, prevent new login, delete or irreversibly anonymise the account and learning records in a transactional job, record an immutable audit event and then notify the verified account holder that the account has been deleted. Until completion, the user-facing wording must say “request submitted” or “pending administrator approval”, not claim that deletion is complete.</p>
       <p><b>Cookies and security:</b> use secure, HttpOnly, SameSite session cookies over HTTPS; CSRF protection; strong password hashing; rate limiting; account lockout controls; least-privilege roles; encryption in transit and at rest; secret management; database backups; monitoring; alerting; vulnerability patching; and a tested breach-response process. Only describe cookies and analytics that are actually deployed.</p>
       <p><b>Content governance and accessibility:</b> assign an owner and review date to every help article. Keep legal and operational text synchronised with the live product. Preserve the native <code>details</code>/<code>summary</code> keyboard behaviour, visible focus, live search status, reduced-motion support and responsive layout. Test with keyboard-only use, screen readers, 200%/400% zoom, iOS Safari, Android TalkBack, tablet layouts and managed school browsers before release.</p>
     </aside>
@@ -724,6 +973,7 @@
   <script>
     const MATHBASE_PROFILE_KEY = "mathbase11PlusLearner";
     const MATHBASE_AUTH_KEY = "mathbase11PlusAuthenticated";
+    const MATHBASE_DELETION_REQUESTS_KEY = "mathbaseAccountDeletionRequestsV1";
 
     function logOutMathBase(event) {
       if (event) event.preventDefault();
@@ -813,13 +1063,188 @@
       applyFilters();
     }
 
+    function readJsonStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function currentAccountAlias() {
+      const profile = readJsonStorage(MATHBASE_PROFILE_KEY, {});
+      const value = profile && (profile.username || profile.userName || profile.alias || profile.name);
+      return String(value || "CK223").trim() || "CK223";
+    }
+
+    function readDeletionRequests() {
+      const requests = readJsonStorage(MATHBASE_DELETION_REQUESTS_KEY, []);
+      return Array.isArray(requests) ? requests : [];
+    }
+
+    function saveDeletionRequests(requests) {
+      try {
+        localStorage.setItem(MATHBASE_DELETION_REQUESTS_KEY, JSON.stringify(requests));
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function createDeletionReference() {
+      const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+      let randomPart = "000000";
+      try {
+        const values = new Uint32Array(1);
+        crypto.getRandomValues(values);
+        randomPart = values[0].toString(36).toUpperCase().padStart(6, "0").slice(-6);
+      } catch (error) {
+        randomPart = Math.random().toString(36).slice(2, 8).toUpperCase().padEnd(6, "0");
+      }
+      return `DEL-${datePart}-${randomPart}`;
+    }
+
+    function formatDeletionDate(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "Not available";
+      return new Intl.DateTimeFormat("en-GB", {
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZone: "Europe/London"
+      }).format(date);
+    }
+
+    function activeDeletionRequest(alias) {
+      return readDeletionRequests()
+        .filter((request) => request && String(request.accountAlias || "").toLowerCase() === alias.toLowerCase())
+        .sort((a, b) => String(b.requestedAt || "").localeCompare(String(a.requestedAt || "")))[0] || null;
+    }
+
+    function initialiseAccountDeletion() {
+      const dialog = document.getElementById("deleteAccountDialog");
+      const openers = Array.from(document.querySelectorAll("[data-open-delete-account]"));
+      const closers = Array.from(document.querySelectorAll("[data-close-delete-dialog]"));
+      const confirmButton = document.getElementById("confirmDeleteAccount");
+      const confirmStep = document.getElementById("deleteConfirmStep");
+      const successStep = document.getElementById("deleteSuccessStep");
+      const aliasField = document.getElementById("deleteAccountAlias");
+      const referenceField = document.getElementById("deleteRequestReference");
+      const submittedField = document.getElementById("deleteRequestSubmitted");
+      const statusBox = document.getElementById("deletionStatus");
+      if (!dialog || !confirmButton || !confirmStep || !successStep || !statusBox) return;
+
+      const alias = currentAccountAlias();
+      let transientRequest = null;
+      aliasField.textContent = alias;
+
+      function latestRequest() {
+        return activeDeletionRequest(alias) || transientRequest;
+      }
+
+      function statusLabel(status) {
+        const normalisedStatus = String(status || "").toLowerCase();
+        if (["completed", "deleted", "approved_and_deleted"].includes(normalisedStatus)) return "completed";
+        if (["rejected", "cancelled"].includes(normalisedStatus)) return "closed";
+        return "pending";
+      }
+
+      function setOpenerState(disabled, label) {
+        openers.forEach((button) => {
+          button.disabled = disabled;
+          const labelNode = button.querySelector("[data-delete-label]");
+          if (labelNode) labelNode.textContent = label;
+          else button.textContent = label;
+        });
+      }
+
+      function renderStatus() {
+        const request = latestRequest();
+        if (!request) {
+          statusBox.dataset.state = "none";
+          statusBox.innerHTML = "<strong>No deletion request is active</strong><span>Your account remains available.</span>";
+          setOpenerState(false, "Delete My Account");
+          return;
+        }
+        const state = statusLabel(String(request.status || "pending_admin_approval"));
+        if (state === "completed") {
+          statusBox.dataset.state = "completed";
+          statusBox.innerHTML = `<strong>Your account has been deleted</strong><span>Completed ${formatDeletionDate(request.completedAt || request.updatedAt || request.requestedAt)} · ${request.requestId}</span>`;
+          setOpenerState(true, "Account deleted");
+        } else if (state === "closed") {
+          statusBox.dataset.state = "none";
+          statusBox.innerHTML = `<strong>Previous request ${String(request.status).toLowerCase()}</strong><span>You may submit a new request if needed.</span>`;
+          setOpenerState(false, "Delete My Account");
+        } else {
+          statusBox.dataset.state = "pending";
+          statusBox.innerHTML = `<strong>Pending administrator approval</strong><span>${request.requestId} · submitted ${formatDeletionDate(request.requestedAt)}</span>`;
+          setOpenerState(false, "View deletion request");
+        }
+      }
+
+      function showDialog() {
+        const existing = latestRequest();
+        confirmStep.hidden = false;
+        successStep.hidden = true;
+        dialog.setAttribute("aria-labelledby", "deleteDialogTitle");
+        if (existing && statusLabel(String(existing.status || "")) === "pending") {
+          referenceField.textContent = existing.requestId;
+          submittedField.textContent = formatDeletionDate(existing.requestedAt);
+          confirmStep.hidden = true;
+          successStep.hidden = false;
+          dialog.setAttribute("aria-labelledby", "deleteSuccessTitle");
+        }
+        if (typeof dialog.showModal === "function") dialog.showModal();
+        else dialog.setAttribute("open", "");
+      }
+
+      function closeDialog() {
+        if (typeof dialog.close === "function") dialog.close();
+        else dialog.removeAttribute("open");
+      }
+
+      openers.forEach((button) => button.addEventListener("click", showDialog));
+      closers.forEach((button) => button.addEventListener("click", closeDialog));
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) closeDialog();
+      });
+
+      confirmButton.addEventListener("click", () => {
+        const existing = latestRequest();
+        const request = existing && statusLabel(String(existing.status || "")) === "pending"
+          ? existing
+          : {
+              requestId: createDeletionReference(),
+              accountAlias: alias,
+              requestedAt: new Date().toISOString(),
+              status: "pending_admin_approval",
+              source: "help-page",
+              prototype: true
+            };
+        if (!existing || existing.requestId !== request.requestId) {
+          transientRequest = request;
+          const requests = readDeletionRequests();
+          requests.push(request);
+          saveDeletionRequests(requests);
+        }
+        referenceField.textContent = request.requestId;
+        submittedField.textContent = formatDeletionDate(request.requestedAt);
+        confirmStep.hidden = true;
+        successStep.hidden = false;
+        dialog.setAttribute("aria-labelledby", "deleteSuccessTitle");
+        renderStatus();
+      });
+
+      renderStatus();
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       initialisePrimaryNavigation();
       initialiseHelpTopics();
+      initialiseAccountDeletion();
       document.querySelectorAll("[data-logout]").forEach((element) => element.addEventListener("click", logOutMathBase));
       document.getElementById("currentYear").textContent = String(new Date().getFullYear());
     });
   </script>
 </body>
 </html>
-
